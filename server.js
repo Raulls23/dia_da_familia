@@ -1,6 +1,9 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import pg from 'pg';
+import * as dotenv from 'dotenv';
+
+dotenv.config()
 
 const { Pool } = pg;
 
@@ -11,12 +14,19 @@ await fastify.register(cors, {
 });
 
 const pool = new Pool({
-    user: 'postgres',
-    password: 'senai',
-    host: 'localhost',
-    port: 5432,
-    database: 'familia'
-});
+    connectionString: process.env.url_bd,
+    ssl:{
+            rejectUnauthorized: false
+    }
+})
+
+// const pool = new Pool({
+//     user: 'postgres',
+//     password: 'senai',
+//     host: 'localhost',
+//     port: 5432,
+//     database: 'familia'
+// });
 
 fastify.post('/formularios', async (request, reply) => {
     const { nome } = request.body;
