@@ -1,0 +1,57 @@
+### Criar um Formulário
+POST http://localhost:3000/formularios
+Content-Type: application/json
+
+{
+    "nome": "Quiz do Joãozinho"
+}
+
+### Adicionar Questão 1
+POST http://localhost:3000/questoes
+Content-Type: application/json
+
+{
+    "formulario_id": 1,
+    "pergunta": "Qual o tamanho do meu pé?",
+    "opcao_a": "38",
+    "opcao_b": "40",
+    "opcao_c": "42",
+    "opcao_d": "44",
+    "resposta_correta": "C"
+}
+
+### Adicionar Questão 2
+POST http://localhost:3000/questoes
+Content-Type: application/json
+
+{
+    "formulario_id": 1,
+    "pergunta": "Qual minha cor favorita?",
+    "opcao_a": "Azul",
+    "opcao_b": "Verde",
+    "opcao_c": "Amarelo",
+    "opcao_d": "Preto",
+    "resposta_correta": "A"
+}
+
+### Listar todos os formulários (Para o pai escolher)
+GET http://localhost:3000/formularios
+
+### Listar questões de um formulário específico
+GET http://localhost:3000/formularios/1/questoes
+
+### Enviar respostas (Pai do aluno respondendo)
+POST http://localhost:3000/tentativas
+Content-Type: application/json
+
+{
+    "formulario_id": 1,
+    "nome_respondente": "Pai do João",
+    "respostas": [
+        { "questao_id": 1, "opcao_escolhida": "C" },
+        { "questao_id": 2, "opcao_escolhida": "A" }
+    ]
+}
+
+### Ver o Ranking do Formulário
+GET http://localhost:3000/ranking/1
